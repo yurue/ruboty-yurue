@@ -9,18 +9,22 @@ module Ruboty
         private
 
         def kpt
-          message = 'この順番でKPTしよう！\n'
-
           # 渡されたidをシャッフルする
           begin
-            ids = message[:ids]
+            ids = message[:ids].split
             ids.shuffle!
           rescue => e
             'ERROR: ' + e
           end
 
           # シャッフル済みのIDをメッセージとともに返す
-          ids.join(' ')
+          reply = "この順番でKPTしよう！\n"
+
+          ids.each_with_index do |id, i|
+            reply << "#{i+1}回目: #{id}\n"
+          end
+
+          reply
         end
       end
     end
